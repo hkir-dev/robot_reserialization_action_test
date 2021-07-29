@@ -22,7 +22,7 @@ jobs:
     - name: Robot reserialise
       run: |
         curl -L -o robot.jar "https://github.com/ontodev/robot/releases/latest/download/robot.jar"
-        java -jar build/robot.jar convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
+        java -jar robot.jar convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
 
     - name: Commit ontology
       run: |
