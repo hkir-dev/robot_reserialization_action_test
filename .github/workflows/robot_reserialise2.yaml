@@ -10,6 +10,8 @@ jobs:
     # if the PR has been merged
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      target-ontology: ./cl-edit.owl
 
     steps:
     - uses: actions/checkout@v2
@@ -22,13 +24,13 @@ jobs:
     - name: Robot reserialise
       run: |
         curl -L -o robot.jar "https://github.com/ontodev/robot/releases/latest/download/robot.jar"
-        java -jar robot.jar convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
+        java -jar robot.jar convert --input ${{env.target-ontology}} -f ofn --output ${{env.target-ontology}}
 
     - name: Commit ontology
       run: |
           echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add ./cl-full.owl
+          git add ${{env.target-ontology}}
           git commit -m "Automatic robot serialisation after merge of branch ${{github.event.pull_request.head.ref}}" -a
           git push
