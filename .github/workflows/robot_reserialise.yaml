@@ -17,16 +17,18 @@ jobs:
       with:
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of personal token
         fetch-depth: 0 # otherwise, fail to push back to dest
-    - name: robot reserialise
+    - name: Robot reserialise
       run: |
         robot convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
     - name: Commit ontology
       run: |
-          git config --local user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
           git add ./cl-full.owl
           git commit -m "Automatic robot serialisation after merge" -a
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUBTOKEN }}
-        force: true
+          git push
+#    - name: Push changes
+#      uses: ad-m/github-push-action@master
+#      with:
+#        github_token: ${{ secrets.GITHUBTOKEN }}
+#        force: true
