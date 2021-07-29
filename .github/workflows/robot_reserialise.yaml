@@ -5,9 +5,6 @@ on:
   pull_request:
     types: [ closed ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 jobs:
   merge_job:
     # if the PR has been merged
@@ -17,14 +14,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of personal token
+        fetch-depth: 0 # otherwise, fail to push back to dest
     - name: robot reserialise
       run: |
         robot convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
     - name: Commit ontology
       run: |
-          git config --local user.name "serialiser_bot"
+          git config --local user.name "github-actions[bot]"
           git add ./cl-full.owl
-          git commit -m "Automatic robot serialisation after merge"
+          git commit -m "Automatic robot serialisation after merge" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
