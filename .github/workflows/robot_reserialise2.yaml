@@ -1,4 +1,4 @@
-name: Reserialise
+name: Reserialise2
 
 # trigger on pull request closed events
 on:
