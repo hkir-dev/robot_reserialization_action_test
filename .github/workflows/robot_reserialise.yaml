@@ -20,8 +20,17 @@ jobs:
     - name: Robot reserialise
       run: |
         robot convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
+    - name: Print github workspace
+      run: |
+        echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
+        echo "github.workspace = ${{ github.workspace }}"
+        echo "pr.ref = ${{github.event.pull_request.head.ref}}"
+        echo "github.ref = ${{ github.ref }}"
+    - name: Print workspace path
+      run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
     - name: Commit ontology
       run: |
+          echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add ./cl-full.owl
