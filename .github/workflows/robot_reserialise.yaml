@@ -33,8 +33,8 @@ jobs:
       run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
     - name: Change working dir
       run: |
-#        cd ${{ github.workspace }}
         echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
+#        cd ${{ github.workspace }}
     - name: Commit ontology
       run: |
           echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
