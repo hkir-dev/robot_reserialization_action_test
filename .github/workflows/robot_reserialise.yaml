@@ -29,8 +29,9 @@ jobs:
     - name: Print workspace path
       run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
     - name: Change workng dir
-      run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
-      working-directory: ${{ github.workspace }}
+      run: |
+        cd ${{ github.workspace }}
+        echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
     - name: Commit ontology
       run: |
           echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
