@@ -2,8 +2,11 @@ name: Reserialise
 
 # trigger on pull request closed events
 on:
-  pull_request:
-    types: [ closed ]
+#  pull_request:
+#    types: [ closed ]
+  push:
+    paths:
+      - 'not/exists'
 
 jobs:
   merge_job:
