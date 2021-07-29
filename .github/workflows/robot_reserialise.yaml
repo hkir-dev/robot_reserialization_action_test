@@ -10,27 +10,30 @@ jobs:
     # if the PR has been merged
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    container: obolibrary/odkfull:v1.2.26
+#    container: obolibrary/odkfull:v1.2.26
 
     steps:
     - uses: actions/checkout@v2
 #      with:
 #        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of personal token
 #        fetch-depth: 0 # otherwise, fail to push back to dest
-    - name: Robot reserialise
-      run: |
-        robot convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
+    - name: Edit ontology
+      run: echo 'Added...' >> ./cl-full.owl
+#    - name: Robot reserialise
+#      run: |
+#        robot convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
     - name: Print github workspace
       run: |
         echo "GITHUB_WORKSPACE = $GITHUB_WORKSPACE"
         echo "github.workspace = ${{ github.workspace }}"
         echo "pr.ref = ${{github.event.pull_request.head.ref}}"
         echo "github.ref = ${{ github.ref }}"
+        echo git --version
     - name: Print workspace path
       run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
-    - name: Change workng dir
+    - name: Change working dir
       run: |
-        cd ${{ github.workspace }}
+#        cd ${{ github.workspace }}
         echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
     - name: Commit ontology
       run: |
@@ -38,7 +41,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
           git add ./cl-full.owl
-          git commit -m "Automatic robot serialisation after merge" -a
+          git commit -m "Automatic robot serialisation after merge of branch ${{github.event.pull_request.head.ref}}" -a
           git push
 #    - name: Push changes
 #      uses: ad-m/github-push-action@master
