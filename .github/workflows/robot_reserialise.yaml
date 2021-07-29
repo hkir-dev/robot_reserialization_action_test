@@ -14,9 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of personal token
-        fetch-depth: 0 # otherwise, fail to push back to dest
+#      with:
+#        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of personal token
+#        fetch-depth: 0 # otherwise, fail to push back to dest
     - name: Robot reserialise
       run: |
         robot convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
@@ -28,6 +28,9 @@ jobs:
         echo "github.ref = ${{ github.ref }}"
     - name: Print workspace path
       run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
+    - name: Change workng dir
+      run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
+      working-directory: ${{ github.workspace }}
     - name: Commit ontology
       run: |
           echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
