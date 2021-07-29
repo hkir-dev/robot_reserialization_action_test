@@ -14,7 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-#      with:
+      with:
+        GITHUB_WORKSPACE: /home/runner/work/
 #        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of personal token
 #        fetch-depth: 0 # otherwise, fail to push back to dest
     - name: Edit ontology
@@ -29,12 +30,14 @@ jobs:
         echo "pr.ref = ${{github.event.pull_request.head.ref}}"
         echo "github.ref = ${{ github.ref }}"
         echo "echo $(git --version)"
+      working-directory: ${{ github.workspace }}
     - name: Print workspace path
       run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
+      working-directory: ${{ github.workspace }}
     - name: Change working dir
       run: |
         echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
-#        cd ${{ github.workspace }}
+      working-directory: ${{ github.workspace }}
     - name: Commit ontology
       run: |
           echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
@@ -43,6 +46,7 @@ jobs:
           git add ./cl-full.owl
           git commit -m "Automatic robot serialisation after merge of branch ${{github.event.pull_request.head.ref}}" -a
           git push
+      working-directory: ${{ github.workspace }}
 #    - name: Push changes
 #      uses: ad-m/github-push-action@master
 #      with:
