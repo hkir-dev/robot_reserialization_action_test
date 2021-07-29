@@ -4,6 +4,8 @@ name: Reserialise2
 on:
   pull_request:
     types: [ closed ]
+    branches:
+      - main
 
 jobs:
   robot_job:
