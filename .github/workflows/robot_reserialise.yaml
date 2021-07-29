@@ -10,7 +10,7 @@ jobs:
     # if the PR has been merged
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-#    container: obolibrary/odkfull:v1.2.26
+    container: obolibrary/odkfull:v1.2.26
 
     steps:
     - uses: actions/checkout@v2
@@ -18,7 +18,7 @@ jobs:
 #        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of personal token
 #        fetch-depth: 0 # otherwise, fail to push back to dest
     - name: Edit ontology
-      run: echo 'Added...' >> ./cl-full.owl
+      run: echo 'Added...' >> ./testfile.txt
 #    - name: Robot reserialise
 #      run: |
 #        robot convert --input ./cl-full.owl -f ofn --output ./cl-full.owl
@@ -28,7 +28,7 @@ jobs:
         echo "github.workspace = ${{ github.workspace }}"
         echo "pr.ref = ${{github.event.pull_request.head.ref}}"
         echo "github.ref = ${{ github.ref }}"
-        echo git --version
+        echo "echo $(git --version)"
     - name: Print workspace path
       run: echo $GITHUB_WORKSPACE && pwd && echo ${{github.ref}} && ls
     - name: Change working dir
