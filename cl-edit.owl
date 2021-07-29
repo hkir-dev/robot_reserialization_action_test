@@ -21707,7 +21707,7 @@ SubClassOf(obo:CL_0007011 ObjectSomeValuesFrom(obo:RO_0002202 obo:CL_0002607))
 
 # Class: obo:CL_0007012 (non-terminally differentiated odontoblast)
 
-AnnotationAssertion(Annotation(oboInOwl:hasDbXref "GO_REF:0000034"^^xsd:string) Annotation(oboInOwl:hasDbXref "PSPUB:0000170"^^xsd:string) obo:IAO_0000115 obo:CL_0007012 "Odontoblast that non-terminally differentiated, located in the odontogenic papilla and dentine tissue, and transforms from a odontoblast cell."^^xsd:string)
+AnnotationAssertion(Annotation(oboInOwl:hasDbXref "GO_REF:0000034"^^xsd:string) Annotation(oboInOwl:hasDbXref "PSPUB:0000170") obo:IAO_0000115 obo:CL_0007012 "Odontoblast that non-terminally differentiated, located in the odontogenic papilla and dentine tissue, and transforms from a odontoblast cell."^^xsd:string)
 AnnotationAssertion(oboInOwl:hasOBONamespace obo:CL_0007012 "cl"^^xsd:string)
 AnnotationAssertion(rdfs:label obo:CL_0007012 "non-terminally differentiated odontoblast"^^xsd:string)
 SubClassOf(obo:CL_0007012 obo:CL_0000060)
